@@ -22,7 +22,9 @@ export default function loginHandlerFactory(
   transientHandler: TransientStore
 ): HandleLogin {
   return async (req, res, options = {}) => {
+    console.log('START loginHandlerFactory');
     const client = await getClient();
+    console.log('client');
 
     const returnTo = options.returnTo || config.baseURL;
 

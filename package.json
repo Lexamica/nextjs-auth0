@@ -1,7 +1,7 @@
 {
-  "name": "@auth0/nextjs-auth0",
+  "name": "@lexamica-modules/nextjs-auth0",
   "version": "1.9.3",
-  "description": "Next.js SDK for signing in with Auth0",
+  "description": "Next.js SDK for signing in with Auth0 with fixes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "browser": "dist/index.browser.js",
@@ -42,7 +42,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/auth0/nextjs-auth0.git"
+    "url": "git+https://github.com/lexamica/nextjs-auth0.git"
   },
   "keywords": [
     "auth0",
@@ -55,9 +55,9 @@
   "author": "Auth0 (https://auth0.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/auth0/nextjs-auth0/issues"
+    "url": "https://github.com/lexamica/nextjs-auth0/issues"
   },
-  "homepage": "https://github.com/auth0/nextjs-auth0#readme",
+  "homepage": "https://github.com/lexamica/nextjs-auth0#readme",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
