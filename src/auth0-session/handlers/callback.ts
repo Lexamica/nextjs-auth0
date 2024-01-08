@@ -33,8 +33,11 @@ export default function callbackHandlerFactory(
   transientCookieHandler: TransientStore
 ): HandleCallback {
   return async (req, res, options) => {
+    console.log('callbackHandlerFactory');
     const client = await getClient();
+    console.log('callbackHandlerFactory - client', client);
     const redirectUri = options?.redirectUri || getRedirectUri(config);
+    console.log('callbackHandlerFactory - redirectUri', redirectUri);
 
     let expectedState;
     let tokenSet;
@@ -64,14 +67,21 @@ export default function callbackHandlerFactory(
       });
     }
 
+    console.log('callbackHandlerFactory - tokenSet');
+
     const openidState: { returnTo?: string } = decodeState(expectedState as string) as ValidState;
+    console.log('callbackHandlerFactory- openidState', openidState);
     let session = sessionCache.fromTokenSet(tokenSet);
+    console.log('callbackHandlerFactory - session', session);
 
     if (options?.afterCallback) {
       session = await options.afterCallback(req as any, res as any, session, openidState);
     }
+    console.log('callbackHandlerFactory - afterCallback');
 
     sessionCache.create(req, res, session);
+
+    console.log('callbackHandlerFactory - sessionCache.create');
 
     res.writeHead(302, {
       Location: openidState.returnTo || config.baseURL
