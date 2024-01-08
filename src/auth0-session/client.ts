@@ -37,7 +37,7 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
     if (client) {
       return client;
     }
-
+    console.log('get client - client is null');
     const defaultHttpOptions = (options: HttpOptions): HttpOptions => ({
       ...options,
       headers: {
@@ -59,10 +59,12 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
       },
       timeout: config.httpTimeout
     });
+    console.log('get client - defaultHttpOptions');
     const applyHttpOptionsCustom = (entity: Issuer<Client> | typeof Issuer | Client): void => {
       // eslint-disable-next-line no-param-reassign
       entity[custom.http_options] = defaultHttpOptions;
     };
+    console.log('get client - applyHttpOptionsCustom');
 
     applyHttpOptionsCustom(Issuer);
     let issuer: Issuer<Client>;
@@ -71,7 +73,9 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
     } catch (e) {
       throw normalizeAggregateError(e);
     }
+    console.log('get client - Issuer.discover', issuer);
     applyHttpOptionsCustom(issuer);
+    console.log('get client - applyHttpOptionsCustom(issuer)');
 
     const issuerTokenAlgs = Array.isArray(issuer.id_token_signing_alg_values_supported)
       ? issuer.id_token_signing_alg_values_supported
@@ -83,9 +87,12 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
         issuerTokenAlgs
       );
     }
+    console.log('get client - issuerTokenAlgs');
 
     const configRespType = sortSpaceDelimitedString(config.authorizationParams.response_type);
+    console.log('get client - configRespType');
     const issuerRespTypes = Array.isArray(issuer.response_types_supported) ? issuer.response_types_supported : [];
+    console.log('get client - issuerRespTypes');
     issuerRespTypes.map(sortSpaceDelimitedString);
     if (!issuerRespTypes.includes(configRespType)) {
       debug(
@@ -94,6 +101,7 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
         issuerRespTypes
       );
     }
+    console.log('get client - issuerRespTypes.includes(configRespType)');
 
     const configRespMode = config.authorizationParams.response_mode;
     const issuerRespModes = Array.isArray(issuer.response_modes_supported) ? issuer.response_modes_supported : [];
@@ -104,21 +112,26 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
         issuerRespModes
       );
     }
+    console.log('get client - issuerRespModes.includes(configRespMode)');
 
     client = new issuer.Client({
       client_id: config.clientID,
       client_secret: config.clientSecret,
       id_token_signed_response_alg: config.idTokenSigningAlg
     });
+    console.log('get client - issuer.Client');
     applyHttpOptionsCustom(client);
     client[custom.clock_tolerance] = config.clockTolerance;
+    console.log('get client - applyHttpOptionsCustom(client)');
 
     if (config.idpLogout) {
+      console.log('get client - config.idpLogout');
       if (
         config.auth0Logout ||
         ((url.parse(issuer.metadata.issuer).hostname as string).match('\\.auth0\\.com$') &&
           config.auth0Logout !== false)
       ) {
+        console.log('get client - config.auth0Logout');
         Object.defineProperty(client, 'endSessionUrl', {
           value(params: EndSessionParameters) {
             const parsedUrl = url.parse(urlJoin(issuer.metadata.issuer, '/v2/logout'));
@@ -126,6 +139,7 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
               returnTo: params.post_logout_redirect_uri,
               client_id: config.clientID
             };
+            console.log('get client - parsedUrl', parsedUrl);
             return url.format(parsedUrl);
           }
         });
@@ -133,6 +147,7 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
         debug('the issuer does not support RP-Initiated Logout');
       }
     }
+    console.log('get client - client', client);
 
     return client;
   };

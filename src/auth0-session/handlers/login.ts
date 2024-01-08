@@ -22,9 +22,7 @@ export default function loginHandlerFactory(
   transientHandler: TransientStore
 ): HandleLogin {
   return async (req, res, options = {}) => {
-    console.log('START loginHandlerFactory');
     const client = await getClient();
-    console.log('client', client);
 
     const returnTo = options.returnTo || config.baseURL;
 
@@ -41,15 +39,11 @@ export default function loginHandlerFactory(
       ...(opts.authorizationParams || {})
     };
 
-    console.log('getRedirectUri');
-
     const transientOpts: StoreOptions = {
       sameSite: opts.authorizationParams.response_mode === 'form_post' ? 'none' : config.session.cookie.sameSite
     };
 
     const stateValue = await opts.getLoginState(req as any, opts);
-
-    console.log('getLoginState');
     if (typeof stateValue !== 'object') {
       throw new Error('Custom state value must be an object.');
     }
@@ -79,16 +73,12 @@ export default function loginHandlerFactory(
         : undefined)
     };
 
-    console.log('authParams');
-
     const validResponseTypes = ['id_token', 'code id_token', 'code'];
     assert(
       validResponseTypes.includes(authParams.response_type as string),
       `response_type should be one of ${validResponseTypes.join(', ')}`
     );
-    console.log('assert validResponseTypes', authParams.response_type);
     assert(/\bopenid\b/.test(authParams.scope as string), 'scope should contain "openid"');
-    console.log('assert openid', authParams.scope);
 
     if (authParams.max_age) {
       transientHandler.save('max_age', req, res, {
@@ -96,10 +86,8 @@ export default function loginHandlerFactory(
         value: authParams.max_age.toString()
       });
     }
-    console.log('authParams.max_age', authParams.max_age);
 
     const authorizationUrl = client.authorizationUrl(authParams);
-    console.log('authorizationUrl', authorizationUrl);
     debug('redirecting to %s', authorizationUrl);
 
     res.writeHead(302, {
