@@ -114,6 +114,7 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
     }
     console.log('get client - issuerRespModes.includes(configRespMode)');
 
+    console.log('get client - create client config', config);
     client = new issuer.Client({
       client_id: config.clientID,
       client_secret: config.clientSecret,
