@@ -37,7 +37,7 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
     if (client) {
       return client;
     }
-    console.log('get client - client is null');
+    console.log('get client - client is null', config);
     const defaultHttpOptions = (options: HttpOptions): HttpOptions => ({
       ...options,
       headers: {
@@ -67,6 +67,7 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
     console.log('get client - applyHttpOptionsCustom');
 
     applyHttpOptionsCustom(Issuer);
+    console.log('get client - applyHttpOptionsCustom(Issuer)');
     let issuer: Issuer<Client>;
     try {
       issuer = await Issuer.discover(config.issuerBaseURL);
