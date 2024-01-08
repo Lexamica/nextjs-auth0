@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { generators } from 'openid-client';
+import { generators } from '@lexamica-modules/openid-client';
 import { JWKS, JWS, JWK } from 'jose';
 import { signing as deriveKey } from './utils/hkdf';
 import { get as getCookie, clear as clearCookie, set as setCookie } from './utils/cookies';

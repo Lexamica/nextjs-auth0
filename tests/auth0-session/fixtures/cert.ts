@@ -1,5 +1,5 @@
 import { JWK, JWKS, JWT } from 'jose';
-import { IdTokenClaims } from 'openid-client';
+import { IdTokenClaims } from '@lexamica-modules/openid-client';
 
 const k = JWK.asKey({
   e: 'AQAB',

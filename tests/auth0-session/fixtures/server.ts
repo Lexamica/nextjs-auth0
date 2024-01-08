@@ -3,7 +3,7 @@ import { createServer as createHttpServer, IncomingMessage, Server as HttpServer
 import { createServer as createHttpsServer, Server as HttpsServer } from 'https';
 import url from 'url';
 import nock from 'nock';
-import { TokenSet, TokenSetParameters } from 'openid-client';
+import { TokenSet, TokenSetParameters } from '@lexamica-modules/openid-client';
 import onHeaders from 'on-headers';
 import bodyParser from 'body-parser';
 import {

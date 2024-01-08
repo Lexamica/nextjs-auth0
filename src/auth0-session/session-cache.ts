@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { TokenSet } from 'openid-client';
+import { TokenSet } from '@lexamica-modules/openid-client';
 
 export interface SessionCache {
   create(req: IncomingMessage, res: ServerResponse, session: { [key: string]: any }): void;

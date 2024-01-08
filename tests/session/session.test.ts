@@ -1,4 +1,4 @@
-import { TokenSet } from 'openid-client';
+import { TokenSet } from '@lexamica-modules/openid-client';
 import { fromJson, fromTokenSet } from '../../src/session';
 import { makeIdToken } from '../auth0-session/fixtures/cert';
 import { Session } from '../../src';

@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { Client, Issuer } from 'openid-client';
+import { Client, Issuer } from '@lexamica-modules/openid-client';
 import { getConfig, clientFactory, ConfigParameters } from '../../src/auth0-session';
 import { jwks } from './fixtures/cert';
 import pkg from '../../package.json';

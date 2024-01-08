@@ -1,5 +1,5 @@
 import { IncomingMessage } from 'http';
-import { AuthorizationParameters as OidcAuthorizationParameters } from 'openid-client';
+import { AuthorizationParameters as OidcAuthorizationParameters } from '@lexamica-modules/openid-client';
 import { LoginOptions, DeepPartial, getConfig as getBaseConfig } from './auth0-session';
 
 /**

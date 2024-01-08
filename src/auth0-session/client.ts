@@ -1,4 +1,4 @@
-import { Issuer, custom, HttpOptions, Client, EndSessionParameters } from 'openid-client';
+import { Issuer, custom, HttpOptions, Client, EndSessionParameters } from '@lexamica-modules/openid-client';
 import url, { UrlObject } from 'url';
 import urlJoin from 'url-join';
 import createDebug from './utils/debug';
@@ -72,6 +72,7 @@ export default function get(config: Config, { name, version }: Telemetry): Clien
     try {
       issuer = await Issuer.discover(config.issuerBaseURL);
     } catch (e) {
+      console.log('get client - Issuer.error', e);
       throw normalizeAggregateError(e);
     }
     console.log('get client - Issuer.discover', issuer);

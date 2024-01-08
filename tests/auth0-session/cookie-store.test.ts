@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto';
 import { JWK, JWE } from 'jose';
-import { IdTokenClaims } from 'openid-client';
+import { IdTokenClaims } from '@lexamica-modules/openid-client';
 import { setup, teardown } from './fixtures/server';
 import { defaultConfig, fromCookieJar, get, toCookieJar } from './fixtures/helpers';
 import { encryption as deriveKey } from '../../src/auth0-session/utils/hkdf';

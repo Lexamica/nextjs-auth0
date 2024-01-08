@@ -1,5 +1,5 @@
 import { IncomingMessage } from 'http';
-import { AuthorizationParameters as OidcAuthorizationParameters } from 'openid-client';
+import { AuthorizationParameters as OidcAuthorizationParameters } from '@lexamica-modules/openid-client';
 
 /**
  * Configuration properties.

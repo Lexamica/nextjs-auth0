@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TokenSet } from 'openid-client';
+import { TokenSet } from '@lexamica-modules/openid-client';
 import onHeaders from 'on-headers';
 import { Config, SessionCache as ISessionCache, CookieStore } from '../auth0-session';
 import Session, { fromJson, fromTokenSet } from './session';
