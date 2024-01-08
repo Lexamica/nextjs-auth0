@@ -1,6 +1,6 @@
 {
   "name": "@lexamica-modules/nextjs-auth0",
-  "version": "1.9.9",
+  "version": "1.9.10",
   "description": "Next.js SDK for signing in with Auth0 with fixes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
